@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".addFlower.AddFlowerActivity" />
+        <activity android:name=".flowerDetail.FlowerDetailActivity" />
     </application>
 
 </manifest>

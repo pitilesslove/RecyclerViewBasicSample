@@ -13,6 +13,7 @@ import com.example.recyclerviewbasicsample.addFlower.FLOWER_DESCRIPTION
 import com.example.recyclerviewbasicsample.addFlower.FLOWER_NAME
 import com.example.recyclerviewbasicsample.data.Flower
 import com.example.recyclerviewbasicsample.databinding.ActivityMainBinding
+import com.example.recyclerviewbasicsample.flowerDetail.FlowerDetailActivity
 import com.example.recyclerviewbasicsample.utils.ALog
 
 const val FLOWER_ID = "flower id"
@@ -69,14 +70,16 @@ class FlowersListActivity : AppCompatActivity() {
 
     private fun adapterOnClick(flower: Flower) {
         ALog.d("adapterOnClick flower=$flower")
-        val intent = Intent(this, AddFlowerActivity::class.java)
-        activityResultLauncher.launch(intent)
+        val intent = Intent(this, FlowerDetailActivity()::class.java)
+        intent.putExtra(FLOWER_ID, flower.id)
+        startActivity(intent)
     }
 
     /**
      * FAB 클릭 시, 꽃을 리스트에 추가함
      */
     private fun fabOnClick() {
+        ALog.d("fabOnClick")
         val intent = Intent(this, AddFlowerActivity::class.java)
         activityResultLauncher.launch(intent)
     }
