@@ -9,10 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewbasicsample.R
 import com.example.recyclerviewbasicsample.data.Flower
 import com.example.recyclerviewbasicsample.databinding.FlowerItemBinding
+import com.example.recyclerviewbasicsample.utils.ALog
 
 class FlowersAdapter(private val onClick: (Flower) -> Unit) : ListAdapter<Flower, FlowersAdapter.FlowerViewHolder>(FlowerDiffCallback) {
 
     private lateinit var binding : FlowerItemBinding
+
+    init {
+        ALog.d("FlowersAdapter init $this")
+    }
 
     class FlowerViewHolder(binding: FlowerItemBinding, val _onClick: (Flower) -> Unit) : RecyclerView.ViewHolder(binding.root) {
 
@@ -21,6 +26,7 @@ class FlowersAdapter(private val onClick: (Flower) -> Unit) : ListAdapter<Flower
         private var currentFlower: Flower? = null
 
         init {
+            ALog.d("FlowerViewHolder init $this")
             itemView.setOnClickListener {
                 currentFlower?.let {
                     _onClick(it)
@@ -29,6 +35,7 @@ class FlowersAdapter(private val onClick: (Flower) -> Unit) : ListAdapter<Flower
         }
 
         fun bind(flower: Flower) {
+            ALog.d("bind $flower")
             currentFlower = flower
 
             flowerTextView.text = flower.name
@@ -40,11 +47,13 @@ class FlowersAdapter(private val onClick: (Flower) -> Unit) : ListAdapter<Flower
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
+        ALog.d("onCreateViewHolder $viewType")
         binding = FlowerItemBinding.inflate(LayoutInflater.from(parent.context), parent ,false)
         return FlowerViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
+        ALog.d("onBindViewHolder $position")
         val flower = getItem(position)
         holder.bind(flower)
     }
